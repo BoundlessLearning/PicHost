@@ -30,7 +30,7 @@ jobs:
       - name: install cwebp
         run: |
           sudo apt-get update
-          sudo apt-get install cwebp
+          sudo apt-get install webp
       
       - name: get add Pic
         uses: jitterbit/get-changed-files@v1
