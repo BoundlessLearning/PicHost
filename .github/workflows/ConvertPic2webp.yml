@@ -48,8 +48,8 @@ jobs:
           done
       - name: clear jpg png
         run: |
-          rm -rf *.jpg
-          rm -rf *.png
+          rm -rf ./img/*.jpg
+          rm -rf ./img/*.png
       - name: commit
         if: (! ${{ steps.get-changed-file.outputs.added_modified }} || ! ${{ steps.get-changed-file.outputs.removed }})
         run: |
