@@ -23,28 +23,19 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Use Node.js 18.3 # 配置Node环境
-        uses: actions/setup-node@v1 # 配置脚本来自 https://github.com/actions/setup-node
-        with:
-          node-version: "18.3"
     
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
-      - name: Set gulp
-        run:
-          npm i gulp
-          npm i gulp-webp
-          npm i
-      
+      - name: install cwebp
+        run: sudo apt-get install cwebp
       
       - name: get add Pic
         uses: jitterbit/get-changed-files@v1
         id: get-changed-file
       - run: |
           for added_modified_file in ${{ steps.get-changed-file.outputs.added_modified }}; do
-          echo "const gulp = require('gulp');const webp = require('gulp-webp');gulp.task('default', () => (gulp.src('./${added_modified_file}').pipe(webp({quality: 75,preset: 'photo',method: 6})).pipe(gulp.dest('./Img/'))));">gulpfile.js
-          gulp
+            cwebp ./${added_modified_file} -o ./${added_modified_file}.webp
           done
          
       - name: commit
