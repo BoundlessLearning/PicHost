@@ -40,10 +40,9 @@ jobs:
       
       - name: get add Pic
         uses: jitterbit/get-changed-files@v1
-        
-      - name: Convert Pic format to webp
-        run: |
-          for added_modified_file in ${{ steps.files.outputs.all }}; do
+        id: get-changed-file
+      - run: |
+          for added_modified_file in ${{ steps.get-changed-file.outputs.added_modified }}; do
           echo "const gulp = require('gulp');const webp = require('gulp-webp');gulp.task('default', () => (gulp.src('./Img/${added_modified_file}').pipe(webp({quality: 75,preset: 'photo',method: 6})).pipe(gulp.dest('./Img/'))));">gulpfile.js
           gulp
           done
