@@ -8,8 +8,8 @@ on:
   push:
     branches: [ "main" ]
     paths:
-     - '\Img\*.jpg'
-     - '\Img\*.png'
+     - 'Img/*.jpg'
+     - 'Img/*.png'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
