@@ -40,8 +40,8 @@ jobs:
          
       - name: commit
         run: |
-          git config --global superzombies09@gmail.com
-          git config --global BoundlessLearning
+          git config --global user.email superzombies09@gmail.com
+          git config --global user.name BoundlessLearning
           git add .
           git commit -m "update" -a
       - name: Push changes
