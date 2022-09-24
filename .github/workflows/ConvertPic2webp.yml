@@ -45,7 +45,7 @@ jobs:
         run: |
           mapfile -d ',' -t added_modified_files < <(printf '%s,' '${{ steps.files.outputs.added_modified }}')
           for added_modified_file in "${added_modified_files[@]}"; do
-          echo "const gulp = require('gulp');const webp = require('gulp-webp');gulp.task('default', () => (gulp.src('./Img/${added_modified_file}').pipe(webp({quality: 75,preset: 'photo',method: 6})).pipe(gulp.dest('./Img/'))));">>gulpfile.js
+          echo "const gulp = require('gulp');const webp = require('gulp-webp');gulp.task('default', () => (gulp.src('./Img/${added_modified_file}').pipe(webp({quality: 75,preset: 'photo',method: 6})).pipe(gulp.dest('./Img/'))));"
           gulp
           done
          
