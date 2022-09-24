@@ -32,6 +32,7 @@ jobs:
         run:
           npm i -g gulp
           npm i -g gulp-webp
+          npm i
           
       - name: Convert Pic format to webp
         run:
