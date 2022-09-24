@@ -50,6 +50,12 @@ jobs:
         run: |
           rm -rf ./img/*.jpg
           rm -rf ./img/*.png
+          
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: Webp
+          
       - name: commit
         if: (! ${{ steps.get-changed-file.outputs.added_modified }} || ! ${{ steps.get-changed-file.outputs.removed }})
         run: |
