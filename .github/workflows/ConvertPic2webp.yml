@@ -39,7 +39,7 @@ jobs:
             cwebp ./${added_modified_file} -o ./${added_modified_file}.webp
           done
       - name: remove webp
-        if: ! ${{ steps.get-changed-file.outputs.added_modified }}
+        if: (!${{ steps.get-changed-file.outputs.added_modified }})
         run: |
           sudo apt-get update
           sudo apt-get install webp
