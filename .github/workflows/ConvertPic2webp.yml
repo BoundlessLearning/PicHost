@@ -23,17 +23,13 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-      
       - name: get add Pic
         uses: jitterbit/get-changed-files@v1
         id: get-changed-file
       - name: convert pic to webp
         if: (!${{ steps.get-changed-file.outputs.added_modified }})
         run: |
-          sudo apt-get update
+         # sudo apt-get update
           sudo apt-get install webp
           for added_modified_file in ${{ steps.get-changed-file.outputs.added_modified }}; do
             cwebp ./${added_modified_file} -o ./${added_modified_file}.webp
@@ -41,15 +37,13 @@ jobs:
       - name: remove webp
         if: (!${{ steps.get-changed-file.outputs.added_modified }})
         run: |
-          sudo apt-get update
-          sudo apt-get install webp
           for removed_file in ${{ steps.get-changed-file.outputs.removed }}; do
             rm -rf ${removed_file}
           done
       - name: clear jpg png
         run: |
-          rm -rf ./img/*.jpg
-          rm -rf ./img/*.png
+          rm -rf ./Img/*.jpg
+          rm -rf ./Img/*.png
           
       - name: Checkout
         uses: actions/checkout@v3
