@@ -1,0 +1,58 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: CheckOut main
+        uses: actions/checkout@v3
+        with:
+          path: main
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          ref: Webp
+          path: Webp
+          
+      - name: generate markdown link
+        run: |
+          rm -f ./main/markdownLink.txt
+          for file in Webp/Img/*.webp; do
+            echo '![](https://cdn.jsdelivr.net/gh/BoundlessLearning/PicHost@'$file')'>>./main/markdownLink.txt
+          done
+          echo '*********************Split line************************'>>./main/markdownLink.txt
+          for file in Webp/Img/*.webp; do
+            echo '![](https://gcore.jsdelivr.net/gh/BoundlessLearning/PicHost@'$file')'>>./main/markdownLink.txt
+          done
+          echo '*********************Split line************************'>>./main/markdownLink.txt
+          for file in Webp/Img/*.webp; do
+            echo '![](https://fastly.jsdelivr.net/gh/BoundlessLearning/PicHost@'$file')'>>./main/markdownLink.txt
+          done
+      - name: commit main branch
+        if: ${{ steps.get-changed-file.outputs.added != '' || steps.get-changed-file.outputs.removed != '' }}
+        run: |
+          cd main
+          git add markdownLink.txt
+          git commit -m "update" -a
+      - name: Push main changes
+        if: ${{ steps.get-changed-file.outputs.added != '' || steps.get-changed-file.outputs.removed != '' }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.PICUPDATE_KEY }}
+          branch: main
+          directory: ./main
