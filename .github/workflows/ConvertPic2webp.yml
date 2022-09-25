@@ -66,6 +66,7 @@ jobs:
       - name: commit
         if: (! ${{ steps.get-changed-file.outputs.added_modified }} || ! ${{ steps.get-changed-file.outputs.removed }})
         run: |
+          cd Webp
           git config --global user.email superzombies09@gmail.com
           git config --global user.name BoundlessLearning
           git add .
