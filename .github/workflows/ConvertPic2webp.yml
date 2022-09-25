@@ -25,7 +25,9 @@ jobs:
     steps:
        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-    
+        with:
+          path: main
+      - run: cd main
       - name: get add Pic
         uses: jitterbit/get-changed-files@v1
         id: get-changed-file
@@ -52,7 +54,10 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: Webp
+          path: Webp
       - run: |
+          cp -rf ./Img ../Webp/
+          cd ../Webp/Img
           ls -a
       - name: commit
         if: (! ${{ steps.get-changed-file.outputs.added_modified }} || ! ${{ steps.get-changed-file.outputs.removed }})
