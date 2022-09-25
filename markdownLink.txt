@@ -12,3 +12,4 @@
 ![](https://cdn.jsdelivr.net/gh/BoundlessLearning/PicHost@Webp/Img/明细.png.webp)
 ![](https://cdn.jsdelivr.net/gh/BoundlessLearning/PicHost@Webp/Img/添加令牌成功.png.webp)
 ![](https://cdn.jsdelivr.net/gh/BoundlessLearning/PicHost@Webp/Img/添加手机.png.webp)
+![](https://cdn.jsdelivr.net/gh/BoundlessLearning/PicHost@Webp/Img/添加验证器.png.webp)
