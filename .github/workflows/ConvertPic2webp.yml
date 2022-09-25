@@ -71,6 +71,7 @@ jobs:
           git commit -m "update" -a
       - name: commit main branch
         if: ${{ steps.get-changed-file.outputs.added != '' || steps.get-changed-file.outputs.removed != '' }}
+        run: |
           cd main
           git add markdownLink.txt
           git commit -m "update" -a
