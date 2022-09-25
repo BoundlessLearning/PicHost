@@ -76,5 +76,5 @@ jobs:
         with:
           github_token: ${{ secrets.PICUPDATE_KEY }}
           branch: Webp
-      
+          directory: ./Webp
       
