@@ -35,6 +35,8 @@ jobs:
         run: |
          # sudo apt-get update
           sudo apt-get install webp
+          cd main
+          ls -a
           for added_modified_file in ${{ steps.get-changed-file.outputs.added_modified }}; do
             cwebp ./${added_modified_file} -o ./${added_modified_file}.webp
           done
