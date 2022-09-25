@@ -63,6 +63,14 @@ jobs:
           for file in Webp/Img/*.webp; do
             echo '![](https://cdn.jsdelivr.net/gh/BoundlessLearning/PicHost@'$file')'>>./main/markdownLink.txt
           done
+          echo '*********************Split line************************'>>./main/markdownLink.txt
+          for file in Webp/Img/*.webp; do
+            echo '![](https://gcore.jsdelivr.net/gh/BoundlessLearning/PicHost@'$file')'>>./main/markdownLink.txt
+          done
+          echo '*********************Split line************************'>>./main/markdownLink.txt
+          for file in Webp/Img/*.webp; do
+            echo '![](https://fastly.jsdelivr.net/gh/BoundlessLearning/PicHost@'$file')'>>./main/markdownLink.txt
+          done
       - name: commit Webp branch
         if: ${{ steps.get-changed-file.outputs.added_modified != '' || steps.get-changed-file.outputs.removed != '' }}
         run: |
