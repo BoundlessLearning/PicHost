@@ -44,7 +44,9 @@ jobs:
          # sudo apt-get update
           sudo apt-get install webp
           for added_modified_file in ${{ steps.get-changed-file.outputs.added_modified }}; do
-            cwebp ./main/${added_modified_file} -o ./Webp/${added_modified_file}.webp
+            if [ "${added_modified_file##*.}"x = "jpg"x ]||[ "${added_modified_file##*.}"x = "png"x ];then
+              cwebp ./main/${added_modified_file} -o ./Webp/${added_modified_file}.webp
+            fi
           done
           
       - name: sync remove webp file in webp branch
