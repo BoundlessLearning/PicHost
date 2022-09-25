@@ -45,6 +45,8 @@ jobs:
           done
       - name: commit main branch
         run: |
+          git config --global user.email superzombies09@gmail.com
+          git config --global user.name BoundlessLearning
           cd main
           git add markdownLink.txt
           git commit -m "update" -a
