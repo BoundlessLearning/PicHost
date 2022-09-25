@@ -24,7 +24,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - name: CheckOut main
+        uses: actions/checkout@v3
         with:
           path: main
       - name: Checkout branch
@@ -32,38 +33,29 @@ jobs:
         with:
           ref: Webp
           path: Webp
+          
       - name: get add Pic
         uses: jitterbit/get-changed-files@v1
         id: get-changed-file
-      - name: convert pic to webp
+        
+      - name: convert pic to webp and save in Webp branch
         if: ${{ steps.get-changed-file.outputs.added_modified != '' }}
         run: |
          # sudo apt-get update
           sudo apt-get install webp
-          cd main
-          ls -a
           for added_modified_file in ${{ steps.get-changed-file.outputs.added_modified }}; do
-            cwebp ./${added_modified_file} -o ./${added_modified_file}.webp
+            cwebp ./main/${added_modified_file} -o ./Webp/${added_modified_file}.webp
           done
-      - name: remove webp
+          
+      - name: sync remove webp file in webp branch
         if: ${{ steps.get-changed-file.outputs.removed != '' }}
         run: |
           cd Webp
-          ls -a
           for removed_file in ${{ steps.get-changed-file.outputs.removed }}; do
             rm -rf ${removed_file}.webp
           done
-      - name: clear jpg png
-        run: |
-          cd main
-          rm -rf ./Img/*.jpg
-          rm -rf ./Img/*.png
           
-      - run: |
-          cp -rf ./main/Img ./Webp/
-          cd ./Webp/Img
-          ls -a
-      - name: commit
+      - name: commit Webp branch
         if: ${{ steps.get-changed-file.outputs.added_modified != '' || steps.get-changed-file.outputs.removed != '' }}
         run: |
           cd Webp
