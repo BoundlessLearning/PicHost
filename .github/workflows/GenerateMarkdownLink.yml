@@ -44,13 +44,11 @@ jobs:
             echo '![](https://fastly.jsdelivr.net/gh/BoundlessLearning/PicHost@'$file')'>>./main/markdownLink.txt
           done
       - name: commit main branch
-        if: ${{ steps.get-changed-file.outputs.added != '' || steps.get-changed-file.outputs.removed != '' }}
         run: |
           cd main
           git add markdownLink.txt
           git commit -m "update" -a
       - name: Push main changes
-        if: ${{ steps.get-changed-file.outputs.added != '' || steps.get-changed-file.outputs.removed != '' }}
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.PICUPDATE_KEY }}
