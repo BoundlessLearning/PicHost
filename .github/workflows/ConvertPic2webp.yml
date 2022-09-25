@@ -51,7 +51,7 @@ jobs:
           cd Webp
           ls -a
           for removed_file in ${{ steps.get-changed-file.outputs.removed }}; do
-            rm -rf ${removed_file}
+            rm -rf ${removed_file}.webp
           done
       - name: clear jpg png
         run: |
