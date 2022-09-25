@@ -54,19 +54,32 @@ jobs:
           for removed_file in ${{ steps.get-changed-file.outputs.removed }}; do
             rm -rf ${removed_file}.webp
           done
-          
-      - name: commit Webp branch
+      - name: generate markdown link
+        run: |
+          rm -f ./main/markdownLink.txt
+          for file in Webp/Img/*.webp; do
+            echo ![](https://cdn.jsdelivr.net/gh/BoundlessLearning/PicHost@$file)>>./main/markdownLink.txt
+          done
+      - name: commit All branch
         if: ${{ steps.get-changed-file.outputs.added_modified != '' || steps.get-changed-file.outputs.removed != '' }}
         run: |
-          cd Webp
           git config --global user.email superzombies09@gmail.com
           git config --global user.name BoundlessLearning
+          cd Webp
           git add .
           git commit -m "update" -a
-      - name: Push changes
+          cd ../main
+          git add markdownLink.txt
+          git commit -m "update" -a
+      - name: Push Webp changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.PICUPDATE_KEY }}
           branch: Webp
           directory: ./Webp
-      
+      - name: Push main changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.PICUPDATE_KEY }}
+          branch: main
+          directory: ./main
