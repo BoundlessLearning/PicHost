@@ -44,7 +44,7 @@ jobs:
          # sudo apt-get update
           sudo apt-get install webp
           for added_modified_file in ${{ steps.get-changed-file.outputs.added_modified }}; do
-            if [ "${added_modified_file##*.}"x = "jpg"x ]||[ "${added_modified_file##*.}"x = "png"x ];then
+            if [ "${added_modified_file##*.}"x = "jpg"x ]||[ "${added_modified_file##*.}"x = "png"x ]||[ "${added_modified_file##*.}"x = "jpeg"x ];then
               cwebp ./main/${added_modified_file} -o ./Webp/${added_modified_file}.webp
             fi
           done
